@@ -1,7 +1,6 @@
 package user;
 import java.util.ArrayList;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.io.*;
 import java.text.MessageFormat;
 public class UserManagement {
@@ -98,6 +97,8 @@ public class UserManagement {
 	public void addAdmin(Admin person) throws IOException{
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\admin.csv";
 		admin_list.add(person);
+		id_list.add(person.id());
+		pass_list.add(person.pass());
 		String formatTemplate = "{0},{1},{2},{3},{4},{5}";
 		String line = MessageFormat.format(formatTemplate, person.name(),person.id(),person.permission(),
 				person.phone(),person.email(),person.pass());
@@ -107,15 +108,20 @@ public class UserManagement {
 	public void addDoctor(Doctor person) throws IOException{ 
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\doctors.csv";
 		doctor_list.add(person);
+		id_list.add(person.id());
+		pass_list.add(person.pass());
 		String formatTemplate = "{0},{1},{2},{3},{4},{5},{6},{7}";
 		String patients = person.getPatients();
 		String line = MessageFormat.format(formatTemplate, person.name(),person.id(),person.permission(),
 				person.phone(),person.email(),person.pass(),person.price(),patients);
 		writePerson(path, line);
+
 	}
 	public void addPatient(Patient person) throws IOException {
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\patients.csv";
 		patient_list.add(person);
+		id_list.add(person.id());
+		pass_list.add(person.pass());
 		String formatTemplate = "{0},{1},{2},{3},{4},{5},{6},{7}";
 		String line = MessageFormat.format(formatTemplate, person.name(),person.id(),person.permission(),
 				person.phone(),person.email(),person.pass(),person.medicalHistory(),person.address());
@@ -171,26 +177,82 @@ public class UserManagement {
 		fw.close();
 	}
 	public void removeAdmin(Admin person) throws IOException{
-		if (patient_list.indexOf(person)!=-1) {
-			patient_list.remove(patient_list.indexOf(person));
+		int index= id_list.indexOf(person.id());
+		if (admin_list.indexOf(person)!=-1) {
+			admin_list.remove(admin_list.indexOf(person));
+			id_list.remove(index);
+			pass_list.remove(index);
 			String path = new java.io.File(".").getCanonicalPath()+"\\src\\admin.csv";
 			updateDB(path,1);
 		}
 	}
 	public void removeDoctor(Doctor person) throws IOException{
-		if (patient_list.indexOf(person)!=-1) {
-			patient_list.remove(patient_list.indexOf(person));
+		int index= id_list.indexOf(person.id());
+		if (doctor_list.indexOf(person)!=-1) {
+			doctor_list.remove(doctor_list.indexOf(person));
+			id_list.remove(index);
+			pass_list.remove(index);
 			String path = new java.io.File(".").getCanonicalPath()+"\\src\\doctors.csv";
 			updateDB(path,2);
 		}
 	}
-	public void removePatient(Doctor person) throws IOException{
+	public void removePatient(Patient person) throws IOException{
+		int index= id_list.indexOf(person.id());
+		if (patient_list.indexOf(person)!=-1) {
+			patient_list.remove(patient_list.indexOf(person));
+			id_list.remove(index);
+			pass_list.remove(index);
+			String path = new java.io.File(".").getCanonicalPath()+"\\src\\patients.csv";
+			updateDB(path,3);
+		}
+	}
+	public Admin getAdmin(String id) {
+		for (int i=0; i<admin_list.size();i++) {
+			if(admin_list.get(i).id().equals(id)) {
+				return admin_list.get(i);
+			}
+		}
+		return new Admin();
+	}
+	public Doctor getDoctor(String id) {
+		for (int i=0; i<doctor_list.size();i++) {
+			if(doctor_list.get(i).id().equals(id)) {
+				return doctor_list.get(i);
+			}
+		}
+		return new Doctor();
+	}
+	public Patient getPatient(String id) {
+		for (int i=0; i<patient_list.size();i++) {
+			if(patient_list.get(i).id().equals(id)) {
+				return patient_list.get(i);
+			}
+		}
+		return new Patient();
+	}
+	public void updateAdmin(Admin person) throws IOException{
+		if (admin_list.indexOf(person)!=-1) {
+			admin_list.set(patient_list.indexOf(person),person);
+			String path = new java.io.File(".").getCanonicalPath()+"\\src\\admin.csv";
+			updateDB(path,1);
+		}
+	}
+	public void updateDoctor(Doctor person) throws IOException{
+		if (doctor_list.indexOf(person)!=-1) {
+			doctor_list.remove(doctor_list.indexOf(person));
+			String path = new java.io.File(".").getCanonicalPath()+"\\src\\doctors.csv";
+			updateDB(path,2);
+		}
+	}
+	public void updatePatient(Doctor person) throws IOException{
 		if (patient_list.indexOf(person)!=-1) {
 			patient_list.remove(patient_list.indexOf(person));
 			String path = new java.io.File(".").getCanonicalPath()+"\\src\\patients.csv";
 			updateDB(path,3);
 		}
 	}
+	
+	
 	public void printUsers() {
 		System.out.println("-------ADMIN--------");
 		for(int i=0;i<admin_list.size();i++) {
