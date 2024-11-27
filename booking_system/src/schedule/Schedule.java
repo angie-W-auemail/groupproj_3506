@@ -17,6 +17,8 @@ public class Schedule {
 	private Date appointment;
 	private String patient_id;
 	private String doctor_id;
+	private String doctor_comment="";
+	private String prescription="";
 	public Schedule(int year, int month, int date, int block, String patient_id, String doctor_id ) {
 		this.appointment = new Date(year, month, date,block+8,0);
 		this.patient_id = patient_id;
@@ -27,6 +29,18 @@ public class Schedule {
 	}
 	public String patient() {
 		return patient_id;
+	}
+	public void setComment(String comment) {
+		doctor_comment = comment;
+	}
+	public void setPrescription(String prescription) {
+		prescription = prescription;
+	}
+	public String comment() {
+		return doctor_comment;
+	}
+	public String prescription() {
+		return prescription;
 	}
 	public Date getTime() {
 		return appointment;
@@ -41,7 +55,8 @@ public class Schedule {
 				,Integer.parseInt(myArray[2]),Integer.parseInt(myArray[3]),0);
 	}
 	public String appointmentString() {
-		String record = "Datetime: "+dateString(appointment)+" patient: "+patient_id+" doctor_id: "+doctor_id;
+		String record = "Datetime: "+dateString(appointment)+" patient: "+patient_id+" doctor_id: "+doctor_id
+				+" Comment: "+doctor_comment+" prescription: "+prescription;
 		return record;
 	}
 	

@@ -16,18 +16,40 @@ public class ManageSchedule {
 		String line = "";
 		int count =0;
 		Date allDate;
-		String[] myArray;
+		String[] myArray,appointmentDate;
 		while ((line = br.readLine()) != null) {
 			if(count>0) {
 				myArray= line.split(",");
-				allDate = new Date(myArray[0]);
-				Schedule appoint = new Schedule(allDate.getYear(), allDate.getMonth(),allDate.getDate(),allDate.getHours()-8,myArray[1],myArray[2]);
+				appointmentDate = myArray[0].split("-");
+				Schedule appoint = new Schedule(Integer.parseInt(appointmentDate[0]), Integer.parseInt(appointmentDate[1]),
+						Integer.parseInt(appointmentDate[2]),Integer.parseInt(appointmentDate[3])-8,myArray[1],myArray[2]);
 				appointment_list.add(appoint);
 			}
 			count++;
 		}
 		br.close();
 		
+	}
+
+	public ArrayList<Schedule> getRecords(String patient_id){
+		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		for (int i=0; i<appointment_list.size();i++) {
+			Schedule current = appointment_list.get(i);
+			if(current.patient().equals(patient_id)) {
+				list.add(current);
+			}
+		}
+		return list;
+	}
+	public ArrayList<Schedule> getRecorDoc(String doctor_id){
+		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		for (int i=0; i<appointment_list.size();i++) {
+			Schedule current = appointment_list.get(i);
+			if(current.patient().equals(doctor_id)) {
+				list.add(current);
+			}
+		}
+		return list;
 	}
 	//time conflict when booking exising appointment under 1 doctor
 	public boolean conflict(String doctor_id, Date time) {
@@ -64,9 +86,12 @@ public class ManageSchedule {
 		fw.close();
 		for (int i=0; i<appointment_list.size();i++) {
 			Schedule appoint = appointment_list.get(i);
-			line = MessageFormat.format(formatTemplate, appoint.getTime().toString(),appoint.patient(),appoint.doctor());
-			writeSchedule(path,line);
+			line = MessageFormat.format(formatTemplate, appoint.dateString(appoint.getTime()),appoint.patient(),appoint.doctor());
+			bw.write(line);
+			bw.newLine();
 		}
+		bw.close();
+		fw.close();
 	}
 	
 	// add a new appointment
@@ -76,7 +101,7 @@ public class ManageSchedule {
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
 		if(conflict(newAppointment.doctor(),newAppointment.getTime())==false) {
 			appointment_list.add(newAppointment);
-			String line = MessageFormat.format(formatTemplate, newAppointment.getTime().toString(),newAppointment.patient(),newAppointment.doctor());
+			String line = MessageFormat.format(formatTemplate, newAppointment.dateString(newAppointment.getTime()),newAppointment.patient(),newAppointment.doctor());
 			writeSchedule(path,line);
 		}	
 	}

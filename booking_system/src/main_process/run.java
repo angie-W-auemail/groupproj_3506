@@ -1,6 +1,7 @@
 package main_process;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import schedule.ManageSchedule;
 import schedule.Schedule;
@@ -25,10 +26,18 @@ public class run {
 		users.printUsers();
 		ManageSchedule schedule = new ManageSchedule();
 		schedule.getAll();
-		schedule.printAppointments();
-		Schedule time = new Schedule(2022, 4, 15, 2, "d2", "p4"); 
+		//schedule.printAppointments();
+		Schedule time = new Schedule(2022, 7, 23, 1, "p1", "d3"); 
+		String comment = "patient claimes chest pain";
+		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
+		//schedule.updateDB(path);
 		schedule.addSchedule(time);
-		schedule.removeSchedule(time);
+		//ArrayList<Schedule> records = schedule.getRecords("p3");
+//		for(int i=0;i<records.size();i++) {
+//			System.out.println(records.get(i).appointmentString());
+//		}
+		//ArrayList<Schedule> recordsDoc = schedule.getRecords("p2");
+		
 		schedule.printAppointments();
 		
 	}
