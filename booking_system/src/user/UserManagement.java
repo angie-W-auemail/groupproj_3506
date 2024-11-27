@@ -122,16 +122,73 @@ public class UserManagement {
 		writePerson(path, line);
 	}
 	
-	
-	
-	public void removeAdmin(Admin person) {
+	//delete file and re-input
+	public void updateDB(String path,int permission) throws IOException{
+		String line ="";
+		File file = new File(path);
+		file.delete();
+		FileWriter fw = new FileWriter(file,true);
+		BufferedWriter bw = new BufferedWriter(fw);
+		if (permission==1) {
+			String formatTemplate = "{0},{1},{2},{3},{4},{5}";
+			bw.write("name,id,permission,phone,email,pass");
+			bw.newLine();
+			for (int i=0; i<admin_list.size();i++) {
+				Admin person = admin_list.get(i);
+				line = MessageFormat.format(formatTemplate, person.name(),person.id(),person.permission(),
+						person.phone(),person.email(),person.pass());
+				bw.write(line);
+				bw.newLine();
+				
+			}
+		}
+		else if (permission==2) {
+			String formatTemplate = "{0},{1},{2},{3},{4},{5},{6},{7}}";
+			bw.write("name,id,permission,phone,email,pass,price,patients");
+			bw.newLine();
+			for (int i=0; i<doctor_list.size();i++) {
+				Doctor person = doctor_list.get(i);
+				line = MessageFormat.format(formatTemplate, person.name(),person.id(),person.permission(),
+						person.phone(),person.email(),person.pass(),person.price(),person.getPatients());
+				bw.write(line);
+				bw.newLine();
+			}
+		}
+		else {
+			String formatTemplate = "{0},{1},{2},{3},{4},{5},{6},{7}";
+			bw.write("name,id,permission,phone,email,pass,medicalHistory,address");
+			bw.newLine();
+			for (int i=0; i<patient_list.size();i++) {
+				Patient person = patient_list.get(i);
+				line = MessageFormat.format(formatTemplate, person.name(),person.id(),person.permission(),
+						person.phone(),person.email(),person.pass(),person.medicalHistory(),person.address());
+				bw.write(line);
+				bw.newLine();
+			}
+		}
+		
+		bw.close();
+		fw.close();
+	}
+	public void removeAdmin(Admin person) throws IOException{
 		if (patient_list.indexOf(person)!=-1) {
 			patient_list.remove(patient_list.indexOf(person));
+			String path = new java.io.File(".").getCanonicalPath()+"\\src\\admin.csv";
+			updateDB(path,1);
 		}
 	}
-	public void removeDoctor(Doctor person) {
+	public void removeDoctor(Doctor person) throws IOException{
 		if (patient_list.indexOf(person)!=-1) {
 			patient_list.remove(patient_list.indexOf(person));
+			String path = new java.io.File(".").getCanonicalPath()+"\\src\\doctors.csv";
+			updateDB(path,2);
+		}
+	}
+	public void removePatient(Doctor person) throws IOException{
+		if (patient_list.indexOf(person)!=-1) {
+			patient_list.remove(patient_list.indexOf(person));
+			String path = new java.io.File(".").getCanonicalPath()+"\\src\\patients.csv";
+			updateDB(path,3);
 		}
 	}
 	public void printUsers() {

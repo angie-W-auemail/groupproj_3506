@@ -16,7 +16,8 @@ public class run {
 		//set up instance of user management and load stored users
 		UserManagement users = new UserManagement();
 		users.getAll();
-		
+		String path = new java.io.File(".").getCanonicalPath()+"\\src\\admin.csv";
+		users.updateDB(path, 1);
 		users.printUsers();
 	}
 
