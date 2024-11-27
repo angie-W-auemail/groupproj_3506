@@ -2,6 +2,10 @@ package user;
 /*
 COURSE: COSC3506
 code for the users portion of the booking system
+fields: name, id, password, email, phone, permission
+permission 1: admin
+permission 2: doctor
+permission 3: patient
 contributor: ANQI WANG
 */
 public class User {
@@ -20,7 +24,7 @@ public class User {
 		this.email=email;
 		this.phone = phone;
 	}
-	public void setUser(String name, String user_id, String password, int permission){
+	public void setUser(String email, String phone,String name, String user_id, String password, int permission){
 		this.name=name;
 		this.user_id = user_id;
 		this.password=password;
@@ -43,6 +47,9 @@ public class User {
 	
 	public String pass() {
 		return password;
+	}
+	public int permission() {
+		return permission;
 	}
 	public Boolean isAdmin() {
 		return (permission==1);

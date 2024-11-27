@@ -1,5 +1,12 @@
 package user;
+/*
+code for the patient settings
+fields: patient address, medical history
+functions: 
+setPatient change patient settings
 
+contributor: ANQI WANG
+*/
 public class Patient extends User{
 	private String address;
 	private String medical_history;
@@ -9,7 +16,15 @@ public class Patient extends User{
 			this.address=address;
 			this.medical_history=medical_history;
 	}
-	public void set_Patient(Patient newPatient) {
-		super.setUser(newPatient.email(),newPatient.phone(),);
+	public String address() {
+		return address;
+	}
+	public String medicalHistory() {
+		return medical_history;
+	}
+	public void setPatient(Patient newPatient) {
+		super.setUser(newPatient.email(),newPatient.phone(),newPatient.name(), newPatient.id(),newPatient.pass(),newPatient.permission());
+		this.address = newPatient.address();
+		this.medical_history = newPatient.medicalHistory();
 	}
 }
