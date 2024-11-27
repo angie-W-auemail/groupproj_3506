@@ -12,7 +12,7 @@ public class Doctor extends User {
 	private double price;
 	private ArrayList<String> patients= new ArrayList<String>();
 	Doctor(){};
-	Doctor(String email, String phone,double price,String name, String user_id, String password, int permission){
+	public Doctor(String email, String phone,double price,String name, String user_id, String password, int permission){
 			super(email, phone, name, user_id,  password,permission); 
 			this.price = price;
 	}
