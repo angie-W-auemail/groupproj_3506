@@ -1,4 +1,4 @@
-name,id,permission,phone,email,pass,price
-Catherine Duncan,0002,2,926-123-2111,catherinedk2000@gmail.com,33cthrndk,25.5
-Joe Reiss,0003,2,926-443-2111,reissjjj@gmail.com,33ressjjj,40
-Kris Effery,0005,1,416-167-2136,kriseffff@gmail.com,krseeefff,60.55
+name,id,permission,phone,email,pass,price,patients
+Chris Mollens,d1,2,416-778-4455,chrismoll1222@gmail.com,mollchrisef1632,40.5,p6|p5
+David Dunham,d2,2,416-644-1235,daviddh222@gmail.com,daveduhf132,45.5,p3|p4
+Cassey Toll,d7,2,647-700-1235,cassey22tll@gmail.com,casstll111,50.5,p1|p2

@@ -17,18 +17,6 @@ public class run {
 		UserManagement users = new UserManagement();
 		users.getAll();
 		
-//		String name="Kris Effery";
-//		String user_id = "0005";
-//		String pass = "krseeefff";
-//		int permission = 1;
-//		String email="kriseffff@gmail.com";
-//		String phone = "416-167-2136";
-//		double price = 60.55;
-//		Doctor person = new Doctor(email, phone,price, name, user_id,  pass,permission);
-//		users.addDoctor(person);
-		
-		
-		
 		users.printUsers();
 	}
 

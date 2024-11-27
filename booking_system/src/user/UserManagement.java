@@ -1,5 +1,7 @@
 package user;
 import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.io.*;
 import java.text.MessageFormat;
 public class UserManagement {
@@ -32,6 +34,7 @@ public class UserManagement {
 	    	}
 	    	count++;
 	    }
+	    br.close();
 	    //read all saved doctors
 	    br = new BufferedReader(new FileReader(path2));
 	    count =0;
@@ -41,11 +44,15 @@ public class UserManagement {
 	    		Doctor person1 = new Doctor( myArray[4], myArray[3],Double.parseDouble(myArray[6]),
         				myArray[0], myArray[1], myArray[5],Integer.parseInt(myArray[2]));
 	    		doctor_list.add(person1);
+	    		// Split the string by comma and collect into ArrayList
+	    		ArrayList<String> patientsList = new ArrayList<>(Arrays.asList(myArray[7].split("\\|")));
+	    		person1.setPatients(patientsList);
 	    		id_list.add(person1.id());
 	    		pass_list.add(person1.pass());
 	    	}
 	    	count++;
 	    }
+	    br.close();
 	    //read all patients
 	    br = new BufferedReader(new FileReader(path3));
 	    count =0;
@@ -100,9 +107,10 @@ public class UserManagement {
 	public void addDoctor(Doctor person) throws IOException{ 
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\doctors.csv";
 		doctor_list.add(person);
-		String formatTemplate = "{0},{1},{2},{3},{4},{5},{6}";
+		String formatTemplate = "{0},{1},{2},{3},{4},{5},{6},{7}";
+		String patients = person.getPatients();
 		String line = MessageFormat.format(formatTemplate, person.name(),person.id(),person.permission(),
-				person.phone(),person.email(),person.pass(),person.price());
+				person.phone(),person.email(),person.pass(),person.price(),patients);
 		writePerson(path, line);
 	}
 	public void addPatient(Patient person) throws IOException {
@@ -113,6 +121,8 @@ public class UserManagement {
 				person.phone(),person.email(),person.pass(),person.medicalHistory(),person.address());
 		writePerson(path, line);
 	}
+	
+	
 	
 	public void removeAdmin(Admin person) {
 		if (patient_list.indexOf(person)!=-1) {
@@ -137,7 +147,8 @@ public class UserManagement {
 			System.out.println("Name: "+doctor_list.get(i).name()+" ID: "
 					+doctor_list.get(i).id()+" Permission: "+doctor_list.get(i).permission()+
 					" Phone: "+ doctor_list.get(i).phone()+ " Email: "+ doctor_list.get(i).email()+
-					" Password: "+ doctor_list.get(i).pass()+" Price: "+ doctor_list.get(i).price());
+					" Password: "+ doctor_list.get(i).pass()+" Price: "+ doctor_list.get(i).price()+
+					" Patients: "+doctor_list.get(i).getPatients());
 		}
 		System.out.println("-------PATIENT--------");
 		for(int i=0;i<patient_list.size();i++) {
