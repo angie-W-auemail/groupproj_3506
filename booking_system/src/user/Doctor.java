@@ -1,6 +1,6 @@
 package user;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 /*
 code for the doctor settings
 fields: doctor email, doctor phone, doctor pricing, doctor assigned patients
@@ -12,7 +12,7 @@ public class Doctor extends User {
 	private double price;
 	private ArrayList<String> patients= new ArrayList<String>();
 	Doctor(){};
-	Doctor(String email, String phone,double price,String name, String user_id, String password, int permission){
+	public Doctor(String email, String phone,double price,String name, String user_id, String password, int permission){
 			super(email, phone, name, user_id,  password,permission); 
 			this.price = price;
 	}
@@ -29,6 +29,12 @@ public class Doctor extends User {
 		else {
 			return true;
 		}
+	}
+	public void setPatients(ArrayList<String> patients) {
+		this.patients=patients;
+	}
+	public String getPatients() {
+		return String.join("|", patients);
 	}
 	public void addPatient(String id) {
 		this.patients.add(id);

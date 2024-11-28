@@ -1,10 +1,26 @@
-package main_process;
+//Group project
+package booking_system.src.main_process;
 
-import appointment.AppointmentBookingGUI; // Import the GUI class
+import javax.swing.SwingUtilities;
 
+import booking_system.src.appointment.AppointmentBookingGUI;
+
+
+
+/*************************
+ * Run class stores the main process of MVC
+ * 
+ */
 public class run {
     public static void main(String[] args) {
-        // Initialize the GUI
-        AppointmentBookingGUI gui = new AppointmentBookingGUI();
+        // Run the GUI in the Event Dispatch Thread (EDT)
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // Initialize the GUI (Appointment Booking)
+                AppointmentBookingGUI gui = new AppointmentBookingGUI();
+                gui.setVisible(true);  // Make sure the GUI is visible
+            }
+        });
     }
 }
