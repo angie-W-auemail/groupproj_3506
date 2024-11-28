@@ -1,9 +1,9 @@
 //Group project on appointment booking system
-package booking_system.src.main_process;
+package main_process;
 
 import javax.swing.SwingUtilities;
 
-import booking_system.src.appointment.AppointmentBookingGUI;
+import appointment.AppointmentBookingGUI;
 
 
 
