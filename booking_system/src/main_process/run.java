@@ -26,12 +26,16 @@ public class run {
 		users.printUsers();
 		ManageSchedule schedule = new ManageSchedule();
 		schedule.getAll();
+		
 		//schedule.printAppointments();
 		Schedule time = new Schedule(2022, 2, 12, 1, "p1", "d2"); 
 		String comment = "patient claimes chest pain";
+		String prescribe = "asprin daily";
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
 		schedule.updateDB(path);
 		schedule.addSchedule(time);
+		schedule.updateComment(time, comment);
+		schedule.updatePrescription(time,prescribe);
 		ArrayList<Schedule> records = schedule.getRecords("p2");
 		schedule.printAppointments();
 		

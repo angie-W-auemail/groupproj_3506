@@ -93,7 +93,20 @@ public class ManageSchedule {
 		bw.close();
 		fw.close();
 	}
-	
+	public void updateComment(Schedule time, String comment) throws IOException{
+		appointment_list.remove(time);
+		time.setComment(comment);
+		appointment_list.add(time);
+		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
+		updateDB(path);
+	}
+	public void updatePrescription(Schedule time, String prescribe) throws IOException{
+		appointment_list.remove(time);
+		time.setPrescription(prescribe);
+		appointment_list.add(time);
+		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
+		updateDB(path);
+	}
 	// add a new appointment
 	public void addSchedule(Schedule newAppointment) throws IOException{
 		String formatTemplate = "{0},{1},{2},{3},{4}";

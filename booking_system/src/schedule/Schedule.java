@@ -34,7 +34,7 @@ public class Schedule {
 		doctor_comment = comment;
 	}
 	public void setPrescription(String prescription) {
-		prescription = prescription;
+		this.prescription = prescription;
 	}
 	public String comment() {
 		return doctor_comment;
