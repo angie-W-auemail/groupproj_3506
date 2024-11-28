@@ -1,4 +1,4 @@
-//Group project
+//Group project on appointment booking system
 package booking_system.src.main_process;
 
 import javax.swing.SwingUtilities;
