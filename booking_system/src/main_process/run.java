@@ -29,9 +29,9 @@ public class run {
 		schedule.getAll();
 		
 		//schedule.printAppointments();
-		Schedule time = new Schedule(2022, 2, 12, 1, "p1", "d2"); 
-		String comment = "patient claimes chest pain";
-		String prescribe = "asprin daily";
+		Schedule time = new Schedule(2024, 2, 12, 1, "p1", "d2"); 
+		String comment = "patient claimes insomnia";
+		String prescribe = "Melatonin daily dose";
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
 		schedule.updateDB(path);
 		//schedule.addSchedule(time);

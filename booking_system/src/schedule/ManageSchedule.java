@@ -23,6 +23,10 @@ public class ManageSchedule {
 				appointmentDate = myArray[0].split("-");
 				Schedule appoint = new Schedule(Integer.parseInt(appointmentDate[0]), Integer.parseInt(appointmentDate[1]),
 						Integer.parseInt(appointmentDate[2]),Integer.parseInt(appointmentDate[3])-8,myArray[1],myArray[2]);
+				if(myArray.length>3) {
+					appoint.setComment(myArray[3]);
+					appoint.setPrescription(myArray[4]);
+				}
 				appointment_list.add(appoint);
 			}
 			count++;
@@ -53,11 +57,14 @@ public class ManageSchedule {
 	}
 	
 	//time conflict when booking exising appointment under 1 doctor
-	public boolean conflict(String doctor_id, Date time) {
+	public boolean conflict(String doctor_id, Schedule time) {
+		String datetime = time.dateString(time.getTime());
+		
 		for (int i=0; i<appointment_list.size();i++) {
 			Schedule current= appointment_list.get(i);
+			String currentTime = current.dateString(current.getTime());
 			if(current.doctor().equals(doctor_id)) {
-				if (current.getTime().equals(time)) {
+				if (currentTime.equals(datetime)) {
 					return true;
 				}
 			}
@@ -94,14 +101,34 @@ public class ManageSchedule {
 		fw.close();
 	}
 	public void updateComment(Schedule time, String comment) throws IOException{
-		appointment_list.remove(time);
+		String curr;
+		String compare = time.dateString(time.getTime())+time.doctor();
+		for (int i=0; i<appointment_list.size();i++) {
+			Schedule current = appointment_list.get(i);
+			curr = current.dateString(current.getTime())+current.doctor();
+			if(curr.equals(compare)==true) {
+				appointment_list.remove(i);
+			}
+		}
 		time.setComment(comment);
 		appointment_list.add(time);
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
 		updateDB(path);
 	}
 	public void updatePrescription(Schedule time, String prescribe) throws IOException{
-		appointment_list.remove(time);
+		String curr;
+		String compare = time.dateString(time.getTime())+time.doctor();
+		//System.out.println(appointment_list.size());
+		for (int i=0; i<appointment_list.size();i++) {
+			Schedule current = appointment_list.get(i);
+			curr = current.dateString(current.getTime())+current.doctor();
+			//System.out.println(curr.equals(compare));
+			if(curr.equals(compare)==true) {
+				//System.out.println(i);
+				appointment_list.remove(i);
+			}
+		}
+		//System.out.println(appointment_list.size());
 		time.setPrescription(prescribe);
 		appointment_list.add(time);
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
@@ -112,7 +139,7 @@ public class ManageSchedule {
 		String formatTemplate = "{0},{1},{2},{3},{4}";
 		
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
-		if(conflict(newAppointment.doctor(),newAppointment.getTime())==false) {
+		if(conflict(newAppointment.doctor(),newAppointment)==false) {
 			appointment_list.add(newAppointment);
 			String line = MessageFormat.format(formatTemplate, newAppointment.dateString(newAppointment.getTime()),
 					newAppointment.patient(),newAppointment.doctor(),newAppointment.comment(),newAppointment.prescription());

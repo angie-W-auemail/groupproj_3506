@@ -6,8 +6,6 @@ EMAIL;: null     PHONE NUMBER: null     ADDRESS: null
 time,doctor,price, comment, prescription
 datetime: 2022-7-23-9	 	doctor: null		price: 0		comment: 		prescription: 
 datetime: 2022-2-12-9	 	doctor: David Dunham		price: 45.5		comment: 		prescription: 
-datetime: 2022-2-12-9	 	doctor: David Dunham		price: 45.5		comment: 		prescription: 
-datetime: 2022-2-12-9	 	doctor: David Dunham		price: 45.5		comment: 		prescription: 
-datetime: 2022-2-12-9	 	doctor: David Dunham		price: 45.5		comment: patient claimes chest pain		prescription: asprin daily
+datetime: 2024-2-12-9	 	doctor: David Dunham		price: 45.5		comment: patient claimes insomnia		prescription: Melatonin daily dose
 -------------------Historical Visits-------------------
-total:				182.0
+total:				91.0
