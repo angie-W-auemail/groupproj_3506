@@ -1,10 +1,11 @@
-# 3506 Healthcare Booking System
+# COSC3506 Healthcare Booking System
 
 This is a class project for COSC3056. Healthcare booking system built using java.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+This project is a simple healthcare booking sytem with the ability create users, schedule appointments, and make test payments. 
+There are three levels of users that can be made; Admin, Doctor, and patient. This users have different properties.
 
 ## Getting Started
 
