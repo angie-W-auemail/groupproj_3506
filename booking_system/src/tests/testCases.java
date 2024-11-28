@@ -47,5 +47,17 @@ class testCases {
 		assertTrue(numResult);	
 		
 	}
+	@Test
+	void testPassword() {
+		UserManagement users = new UserManagement();
+		try {
+			users.getAll();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean result = users.matchID("p3", "ssclark88spark");
+		assertTrue(result);
+	}
 
 }
