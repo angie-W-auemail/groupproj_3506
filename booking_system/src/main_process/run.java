@@ -21,24 +21,24 @@ public class run {
 		//set up instance of user management and load stored users
 		UserManagement users = new UserManagement();
 		users.getAll();
-		Patient person = users.getPatient("p6");
-		users.removePatient(person);
-		users.addPatient(person);
-		users.printUsers();
+//		Patient person = users.getPatient("p6");
+//		users.removePatient(person);
+//		users.addPatient(person);
+//		users.printUsers();
 		ManageSchedule schedule = new ManageSchedule();
 		schedule.getAll();
 		
 		//schedule.printAppointments();
-		Schedule time = new Schedule(2024, 2, 12, 1, "p1", "d2"); 
-		String comment = "patient claimes insomnia";
-		String prescribe = "Melatonin daily dose";
-		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
-		schedule.updateDB(path);
-		//schedule.addSchedule(time);
-		schedule.updateComment(time, comment);
-		schedule.updatePrescription(time,prescribe);
-		ArrayList<Schedule> records = schedule.getRecords("p2");
-		schedule.printAppointments();
+//		Schedule time = new Schedule(2024, 2, 12, 1, "p1", "d2"); 
+//		String comment = "patient claimes insomnia";
+//		String prescribe = "Melatonin daily dose";
+//		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
+//		schedule.updateDB(path);
+//		//schedule.addSchedule(time);
+//		schedule.updateComment(time, comment);
+//		schedule.updatePrescription(time,prescribe);
+//		ArrayList<Schedule> records = schedule.getRecords("p2");
+//		schedule.printAppointments();
 		Records patientRecords = new Records("p1");
 		patientRecords.setRecords(schedule, users);
 		patientRecords.genReport();
