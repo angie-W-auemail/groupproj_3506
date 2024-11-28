@@ -1,51 +1,26 @@
-package main_process;
+//Group project on appointment booking system
+package booking_system.src.main_process;
 
-import java.io.*;
-import java.util.ArrayList;
+import javax.swing.SwingUtilities;
 
-import TreatementRecords.Records;
-import schedule.ManageSchedule;
-import schedule.Schedule;
-import user.Admin;
-import user.Doctor;
-import user.Patient;
-import user.UserManagement;
+import booking_system.src.appointment.AppointmentBookingGUI;
+
+
+
 /*************************
  * Run class stores the main process of MVC
  * 
  */
 public class run {
-
-	public static void main(String[] args) throws IOException{
-		// TODO Auto-generated method stub
-		//set up instance of user management and load stored users
-		UserManagement users = new UserManagement();
-		users.getAll();
-//		Patient person = users.getPatient("p6");
-//		users.removePatient(person);
-//		users.addPatient(person);
-//		users.printUsers();
-		ManageSchedule schedule = new ManageSchedule();
-		schedule.getAll();
-		
-		//schedule.printAppointments();
-//		Schedule time = new Schedule(2024, 2, 12, 1, "p1", "d2"); 
-//		String comment = "patient claimes insomnia";
-//		String prescribe = "Melatonin daily dose";
-//		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
-//		schedule.updateDB(path);
-//		//schedule.addSchedule(time);
-//		schedule.updateComment(time, comment);
-//		schedule.updatePrescription(time,prescribe);
-//		ArrayList<Schedule> records = schedule.getRecords("p2");
-//		schedule.printAppointments();
-		Records patientRecords = new Records("p1");
-		patientRecords.setRecords(schedule, users);
-		patientRecords.genReport();
-		
-		
-		
-	}
-
+    public static void main(String[] args) {
+        // Run the GUI in the Event Dispatch Thread (EDT)
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // Initialize the GUI (Appointment Booking)
+                AppointmentBookingGUI gui = new AppointmentBookingGUI();
+                gui.setVisible(true);  // Make sure the GUI is visible
+            }
+        });
+    }
 }
-
