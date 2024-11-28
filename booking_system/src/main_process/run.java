@@ -1,9 +1,13 @@
 //Group project on appointment booking system
-package booking_system.src.main_process;
+package main_process;
+
+import java.io.IOException;
 
 import javax.swing.SwingUtilities;
-
-import booking_system.src.appointment.AppointmentBookingGUI;
+import appointment.AppointmentBookingGUI;
+import login.LogInController;
+import login.LogInView;
+import user.UserManagement;
 
 
 
@@ -12,14 +16,25 @@ import booking_system.src.appointment.AppointmentBookingGUI;
  * 
  */
 public class run {
-    public static void main(String[] args) {
+    public static void main(String[] args)throws IOException {
         // Run the GUI in the Event Dispatch Thread (EDT)
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+            	
                 // Initialize the GUI (Appointment Booking)
-                AppointmentBookingGUI gui = new AppointmentBookingGUI();
-                gui.setVisible(true);  // Make sure the GUI is visible
+            	UserManagement users = new UserManagement();
+            	try {
+					users.getAll();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	LogInView view       = new LogInView();
+                LogInController controller = new LogInController(view, users);        
+                view.setVisible(true);
+
+            
             }
         });
     }
