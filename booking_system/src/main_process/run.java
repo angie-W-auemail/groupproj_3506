@@ -3,6 +3,7 @@ package main_process;
 import java.io.*;
 import java.util.ArrayList;
 
+import TreatementRecords.Records;
 import schedule.ManageSchedule;
 import schedule.Schedule;
 import user.Admin;
@@ -33,11 +34,15 @@ public class run {
 		String prescribe = "asprin daily";
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
 		schedule.updateDB(path);
-		schedule.addSchedule(time);
+		//schedule.addSchedule(time);
 		schedule.updateComment(time, comment);
 		schedule.updatePrescription(time,prescribe);
 		ArrayList<Schedule> records = schedule.getRecords("p2");
 		schedule.printAppointments();
+		Records patientRecords = new Records("p1");
+		patientRecords.setRecords(schedule, users);
+		patientRecords.genReport();
+		
 		
 		
 	}
