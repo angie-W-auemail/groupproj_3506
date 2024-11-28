@@ -27,18 +27,14 @@ public class run {
 		ManageSchedule schedule = new ManageSchedule();
 		schedule.getAll();
 		//schedule.printAppointments();
-		Schedule time = new Schedule(2022, 7, 23, 1, "p1", "d3"); 
+		Schedule time = new Schedule(2022, 2, 12, 1, "p1", "d2"); 
 		String comment = "patient claimes chest pain";
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
-		//schedule.updateDB(path);
+		schedule.updateDB(path);
 		schedule.addSchedule(time);
-		//ArrayList<Schedule> records = schedule.getRecords("p3");
-//		for(int i=0;i<records.size();i++) {
-//			System.out.println(records.get(i).appointmentString());
-//		}
-		//ArrayList<Schedule> recordsDoc = schedule.getRecords("p2");
-		
+		ArrayList<Schedule> records = schedule.getRecords("p2");
 		schedule.printAppointments();
+		
 		
 	}
 

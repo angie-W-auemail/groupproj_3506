@@ -51,6 +51,7 @@ public class ManageSchedule {
 		}
 		return list;
 	}
+	
 	//time conflict when booking exising appointment under 1 doctor
 	public boolean conflict(String doctor_id, Date time) {
 		for (int i=0; i<appointment_list.size();i++) {
@@ -75,18 +76,17 @@ public class ManageSchedule {
 	}
 	public void updateDB(String path) throws IOException{
 		String line ="";
-		String formatTemplate = "{0},{1},{2}";
+		String formatTemplate = "{0},{1},{2},{3},{4}";
 		File file = new File(path);
 		file.delete();
 		FileWriter fw = new FileWriter(file,true);
 		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write("time,patient,doctor");
+		bw.write("time,patient,doctor,comment,prescription");
 		bw.newLine();
-		bw.close();
-		fw.close();
 		for (int i=0; i<appointment_list.size();i++) {
 			Schedule appoint = appointment_list.get(i);
-			line = MessageFormat.format(formatTemplate, appoint.dateString(appoint.getTime()),appoint.patient(),appoint.doctor());
+			line = MessageFormat.format(formatTemplate, appoint.dateString(appoint.getTime()),appoint.patient(),appoint.doctor(),
+					appoint.comment(),appoint.prescription());
 			bw.write(line);
 			bw.newLine();
 		}
@@ -96,12 +96,13 @@ public class ManageSchedule {
 	
 	// add a new appointment
 	public void addSchedule(Schedule newAppointment) throws IOException{
-		String formatTemplate = "{0},{1},{2}";
+		String formatTemplate = "{0},{1},{2},{3},{4}";
 		
 		String path = new java.io.File(".").getCanonicalPath()+"\\src\\appointments.csv";
 		if(conflict(newAppointment.doctor(),newAppointment.getTime())==false) {
 			appointment_list.add(newAppointment);
-			String line = MessageFormat.format(formatTemplate, newAppointment.dateString(newAppointment.getTime()),newAppointment.patient(),newAppointment.doctor());
+			String line = MessageFormat.format(formatTemplate, newAppointment.dateString(newAppointment.getTime()),
+					newAppointment.patient(),newAppointment.doctor(),newAppointment.comment(),newAppointment.prescription());
 			writeSchedule(path,line);
 		}	
 	}
