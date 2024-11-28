@@ -35,5 +35,17 @@ class testCases {
 		assertTrue(numResult);	
 		
 	}
+	@Test
+	void testPatient() {
+		UserManagement users = new UserManagement();
+		user.Patient patientTest = new user.Patient("18 algoma road", "fractured ankle" , "james@gmail.com", "4163829321", "jude clash", "413123", "test", 3);
+		boolean nameResult = patientTest.name() == "James Clash";
+		boolean emailResult = patientTest.email() == "james@gmail.com";
+		boolean numResult = patientTest.phone() == "4166655432";
+		assertTrue(nameResult);
+		assertTrue(emailResult);	
+		assertTrue(numResult);	
+		
+	}
 
 }
