@@ -15,8 +15,29 @@ public class UserManagement {
 	//read from db all arraylists
 	 public static UserManagement getInstance() {
 	        return instance;
-	    }
-	
+	  }
+	 public User getUser(int permission, int index) {
+		 if (permission ==1) {
+			 return (User)(admin_list.get(index));
+		 }
+		 else if (permission ==2) {
+			 return (User)(doctor_list.get(index));
+		 }
+		 else if (permission ==3) {
+			 return (User)(patient_list.get(index));
+		 }
+		 return new User();
+	 }
+	 public int adminSize () {
+		 return admin_list.size();
+	 }
+	 public int doctorSize () {
+		 return doctor_list.size();
+	 }
+	 public int patientSize () {
+		 return patient_list.size();
+	 }
+	 
 	public void getAll() throws IOException{
 		String line = "";
 		String currentPath = new java.io.File(".").getCanonicalPath();

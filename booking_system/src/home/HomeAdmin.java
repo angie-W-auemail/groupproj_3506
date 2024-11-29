@@ -5,6 +5,7 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import user.User;
+import user_accounts.AdminUserView;
 public class HomeAdmin extends JFrame {
 
     public HomeAdmin(User person) {
@@ -63,7 +64,7 @@ public class HomeAdmin extends JFrame {
 
         // Button actions (examples)
         manageUsersButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage User Accounts clicked!");
+        	AdminUserView view = new AdminUserView();
             this.dispose();
         });
 
