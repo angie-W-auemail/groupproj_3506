@@ -1,14 +1,17 @@
 package login;
-import appointment.AppointmentBookingGUI;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import user.UserManagement;
+import home.HomeAdmin;
+import home.HomeDoctorView;
 public class LogInController {
     private LogInModel model;
     private LogInView view;
     private UserManagement users;
     private boolean loginSuccess;
+    private int permission;
     public LogInController(LogInView view, UserManagement user_list){
         this.view = view;
         users = user_list;
@@ -24,8 +27,20 @@ public class LogInController {
                     view.showMessage("Login succesfully!");
                     logged();
                     view.dispose();
-                    AppointmentBookingGUI gui = new AppointmentBookingGUI();
-            		gui.setVisible(true);
+                    if (permission ==1) {
+                    	HomeAdmin view  = new HomeAdmin();
+                    	view.setVisible(true);
+                    }
+                    else if (permission ==2) {
+                    	HomeDoctorView view  = new HomeDoctorView();
+                    	view.setVisible(true);
+                    	
+                    }
+                    else if (permission ==3) {
+                    	
+                    }
+                    
+
                     
                 }else{
                 	
@@ -41,7 +56,15 @@ public class LogInController {
     	return loginSuccess;
     }
     public boolean checkUser(LogInModel user) throws Exception {
- 
+    	if (users.getAdmin(user.getUserName()).permission()!=0) {
+    		this.permission =users.getAdmin(user.getUserName()).permission();
+    	}
+    	else if (users.getDoctor(user.getUserName()).permission()!=0) {
+    		this.permission =users.getDoctor(user.getUserName()).permission();
+    	}
+    	else if (users.getPatient(user.getUserName()).permission()!=0) {
+    		this.permission =users.getPatient(user.getUserName()).permission();
+    	}
     	return this.users.matchID(user.getUserName(),  user.getPassword());
 
       }

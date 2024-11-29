@@ -19,7 +19,7 @@ public class LogInView extends JFrame implements ActionListener{
     private LogInModel model;
  
     public LogInView(){
-        super("Login MVC");
+        super("Login");
  
         txtUsername = new JTextField(15);
         txtPassword = new JPasswordField(15);
@@ -33,6 +33,7 @@ public class LogInView extends JFrame implements ActionListener{
         content.add(new JLabel("Password:"));
         content.add(txtPassword);
         content.add(btnLogin);
+        
  
         btnLogin.addActionListener(this);
  

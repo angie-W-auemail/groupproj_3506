@@ -4,11 +4,13 @@ package main_process;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
+
 import appointment.AppointmentBookingGUI;
+//import appointment.AppointmentBookingGUI;
 import login.LogInController;
 import login.LogInView;
 import user.UserManagement;
-
+import appointment.AppointmentBookingGUI;
 
 
 /*************************
@@ -33,6 +35,9 @@ public class run {
             	LogInView view       = new LogInView();
                 LogInController controller = new LogInController(view, users);        
                 view.setVisible(true);
+                
+                //AppointmentBookingGUI gui = new AppointmentBookingGUI();
+        		//gui.setVisible(true);
 
             
             }
