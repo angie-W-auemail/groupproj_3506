@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import manageAccounts.manageView;
+
 public class HomeDoctorView extends JFrame {
 
     public HomeDoctorView() {
@@ -51,7 +53,7 @@ public class HomeDoctorView extends JFrame {
         centerPanel.setLayout(new GridLayout(3, 1, 10, 10));
 
         JButton scheduleButton = new JButton("Current Schedule");
-        JButton patientButton = new JButton("patients User Accounts");
+        JButton patientButton = new JButton("View Patient Profiles");
         JButton profileButton = new JButton("Doctor Profile");
 
         // Adding buttons to the center panel
@@ -72,15 +74,17 @@ public class HomeDoctorView extends JFrame {
 
         // Button actions (examples)
         scheduleButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage User Accounts clicked!");
+            JOptionPane.showMessageDialog(this, "View Schedule Clicked!");
         });
 
         patientButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage Schedule clicked!");
+            JOptionPane.showMessageDialog(this, "View Patient Profiles clicked!");
+            manageView view = new manageView();
+            view.setVisible(true);
         });
 
         profileButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage Admin Profile clicked!");
+            JOptionPane.showMessageDialog(this, "Doctor Profile clicked!");
         });
     }
 

@@ -42,9 +42,7 @@ public class LogInController {
                     	HomePatientView view = new HomePatientView();
                     	view.setVisible(true);
                     	
-                    }
-                    
-
+                    }                   
                     
                 }else{
                 	

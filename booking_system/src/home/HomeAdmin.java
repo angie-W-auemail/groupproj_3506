@@ -1,6 +1,7 @@
 package home;
 
 import javax.swing.*;
+import manageAccounts.manageView;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,7 +42,7 @@ public class HomeAdmin extends JFrame {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(3, 1, 10, 10));
 
-        JButton manageUsersButton = new JButton("Manage User Accounts");
+        JButton manageUsersButton = new JButton("Manage Patient Accounts");
         JButton manageScheduleButton = new JButton("Manage Schedule");
         JButton manageAdminProfileButton = new JButton("Manage Admin Profile");
 
@@ -63,7 +64,9 @@ public class HomeAdmin extends JFrame {
 
         // Button actions (examples)
         manageUsersButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage User Accounts clicked!");
+            JOptionPane.showMessageDialog(this, "Manage Patient Accounts clicked!");
+            manageView view = new manageView();
+            view.setVisible(true);
         });
 
         manageScheduleButton.addActionListener((ActionEvent e) -> {
