@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
+import user.User;
 import manageAccounts.manageView;
 
 public class HomeDoctorView extends JFrame {

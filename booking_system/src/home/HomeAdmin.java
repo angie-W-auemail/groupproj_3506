@@ -8,7 +8,7 @@ import user.User;
 import user_accounts.AdminUserView;
 public class HomeAdmin extends JFrame {
 
-    public HomeAdmin(User person) {
+    public HomeAdmin() {
         // Set the frame properties
         setTitle("Homepage");
         setSize(600, 400);
@@ -34,7 +34,7 @@ public class HomeAdmin extends JFrame {
         // Header panel
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(Color.LIGHT_GRAY);
-        JLabel headerLabel = new JLabel("Welcome to the Admin Dashboard, "+person.name());
+        JLabel headerLabel = new JLabel("Welcome to the Admin Dashboard");
         headerLabel.setFont(new Font("Arial", Font.BOLD, 18));
         headerPanel.add(headerLabel);
 

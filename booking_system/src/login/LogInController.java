@@ -7,16 +7,16 @@ import user.UserManagement;
 import home.HomeAdmin;
 import home.HomeDoctorView;
 import home.HomePatientView;
-
+import user.User;
 public class LogInController {
     private LogInModel model;
     private LogInView view;
-    private UserManagement users;
     private boolean loginSuccess;
     private int permission;
-    public LogInController(LogInView view, UserManagement user_list){
+    private User person;
+    private final UserManagement users = UserManagement.getInstance();
+    public LogInController(LogInView view){
         this.view = view;
-        users = user_list;
  
         view.addLoginListener(new LoginListener());
     }
@@ -59,10 +59,12 @@ public class LogInController {
     }
     public boolean checkUser(LogInModel user) throws Exception {
     	if (users.getAdmin(user.getUserName()).permission()!=0) {
-    		this.permission =users.getAdmin(user.getUserName()).permission();
+    		person=users.getAdmin(user.getUserName());
+    		permission = this.person.permission();
     	}
     	else if (users.getDoctor(user.getUserName()).permission()!=0) {
-    		this.permission =users.getDoctor(user.getUserName()).permission();
+    		person=users.getDoctor(user.getUserName());
+    		permission = this.person.permission();
     	}
     	else if (users.getPatient(user.getUserName()).permission()!=0) {
     		this.permission =users.getPatient(user.getUserName()).permission();
