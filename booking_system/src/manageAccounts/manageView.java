@@ -20,14 +20,14 @@ public class manageView extends JFrame {
          JButton button = new JButton("Load Patients");
          button.addActionListener(new ActionListener()  {
              public void actionPerformed(ActionEvent e) {
-                 //Reset textpanes content so on every button click the new content of the read file will be displayed            	 
+                         	 
                  textPane.setText("");
                  String fileResult = "";                 
                  try {
                  BufferedReader csvReader = new BufferedReader(new FileReader("src/patients.csv"));
                  String line = null;
                  while ((line = csvReader.readLine()) != null) {
-                     //Do your logic here which information you want to parse from the csv file and which information you want to display in your textpane
+                     
                      fileResult = fileResult + "\n\n" +line;
                  }
                  }
