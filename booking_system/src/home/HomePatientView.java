@@ -1,11 +1,22 @@
 package home;
-import javax.swing.*;
-import javax.swing.border.*;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import user.User;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+
 public class HomePatientView extends JFrame {
-    public HomePatientView(User person) {
+
+    public HomePatientView() {
         // Set the frame properties
         setTitle("Homepage");
         setSize(600, 400);
@@ -31,7 +42,7 @@ public class HomePatientView extends JFrame {
         // Header panel
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(Color.LIGHT_GRAY);
-        JLabel headerLabel = new JLabel("Welcome to the Patient Dashboard, "+person.name());
+        JLabel headerLabel = new JLabel("Welcome to the Patient Dashboard");
         headerLabel.setFont(new Font("Arial", Font.BOLD, 18));
         headerPanel.add(headerLabel);
 
@@ -39,12 +50,12 @@ public class HomePatientView extends JFrame {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(3, 1, 10, 10));
 
-        JButton profileButton = new JButton("User profile");
-        JButton scheduleButton = new JButton("Doctor Schedule");
+        JButton scheduleButton = new JButton("Your Appointments");        
+        JButton profileButton = new JButton("Patient Profile");
 
         // Adding buttons to the center panel
+        centerPanel.add(scheduleButton);        
         centerPanel.add(profileButton);
-        centerPanel.add(scheduleButton);
 
 
         // Add panels to the main panel
@@ -58,14 +69,14 @@ public class HomePatientView extends JFrame {
         add(outerPanel);
 
         // Button actions (examples)
-        profileButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage User Accounts clicked!");
-            this.dispose();
-        });
-
         scheduleButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage Schedule clicked!");
+            JOptionPane.showMessageDialog(this, "Your Appointments Clicked!");
+        });        
+
+        profileButton.addActionListener((ActionEvent e) -> {
+            JOptionPane.showMessageDialog(this, "Patient Profile Clicked!");
         });
     }
 
 }
+

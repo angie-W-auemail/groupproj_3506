@@ -7,19 +7,16 @@ import user.UserManagement;
 import home.HomeAdmin;
 import home.HomeDoctorView;
 import home.HomePatientView;
-import user.User;
-
-
 
 public class LogInController {
     private LogInModel model;
     private LogInView view;
-    private final UserManagement users = UserManagement.getInstance();
+    private UserManagement users;
     private boolean loginSuccess;
     private int permission;
-    User person;
-    public LogInController(LogInView view){
+    public LogInController(LogInView view, UserManagement user_list){
         this.view = view;
+        users = user_list;
  
         view.addLoginListener(new LoginListener());
     }
@@ -33,20 +30,19 @@ public class LogInController {
                     logged();
                     view.dispose();
                     if (permission ==1) {
-                    	HomeAdmin view  = new HomeAdmin(person);
+                    	HomeAdmin view  = new HomeAdmin();
                     	view.setVisible(true);
                     }
                     else if (permission ==2) {
-                    	HomeDoctorView view  = new HomeDoctorView(person);
+                    	HomeDoctorView view  = new HomeDoctorView();
                     	view.setVisible(true);
                     	
                     }
                     else if (permission ==3) {
-                    	 HomePatientView view = new  HomePatientView(person);
-                    	 view.setVisible(true);
-                    }
-                    
-
+                    	HomePatientView view = new HomePatientView();
+                    	view.setVisible(true);
+                    	
+                    }                   
                     
                 }else{
                 	
@@ -63,16 +59,13 @@ public class LogInController {
     }
     public boolean checkUser(LogInModel user) throws Exception {
     	if (users.getAdmin(user.getUserName()).permission()!=0) {
-    		person=users.getAdmin(user.getUserName());
-    		permission = this.person.permission();
+    		this.permission =users.getAdmin(user.getUserName()).permission();
     	}
     	else if (users.getDoctor(user.getUserName()).permission()!=0) {
-    		person=users.getDoctor(user.getUserName());
-    		permission = this.person.permission();
+    		this.permission =users.getDoctor(user.getUserName()).permission();
     	}
     	else if (users.getPatient(user.getUserName()).permission()!=0) {
-    		person = users.getPatient(user.getUserName());
-    		this.permission =person.permission();
+    		this.permission =users.getPatient(user.getUserName()).permission();
     	}
     	return this.users.matchID(user.getUserName(),  user.getPassword());
 
