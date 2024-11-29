@@ -13,10 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
+import user.User;
 public class HomeDoctorView extends JFrame {
 
-    public HomeDoctorView() {
+    public HomeDoctorView(User person) {
         // Set the frame properties
         setTitle("Homepage");
         setSize(600, 400);
@@ -42,7 +42,7 @@ public class HomeDoctorView extends JFrame {
         // Header panel
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(Color.LIGHT_GRAY);
-        JLabel headerLabel = new JLabel("Welcome to the Doctor Dashboard");
+        JLabel headerLabel = new JLabel("Welcome to the Doctor Dashboard, "+person.name());
         headerLabel.setFont(new Font("Arial", Font.BOLD, 18));
         headerPanel.add(headerLabel);
 

@@ -1,13 +1,11 @@
 package home;
-
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import user.User;
-public class HomeAdmin extends JFrame {
-
-    public HomeAdmin(User person) {
+public class HomePatientView extends JFrame {
+    public HomePatientView(User person) {
         // Set the frame properties
         setTitle("Homepage");
         setSize(600, 400);
@@ -33,7 +31,7 @@ public class HomeAdmin extends JFrame {
         // Header panel
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(Color.LIGHT_GRAY);
-        JLabel headerLabel = new JLabel("Welcome to the Admin Dashboard, "+person.name());
+        JLabel headerLabel = new JLabel("Welcome to the Patient Dashboard, "+person.name());
         headerLabel.setFont(new Font("Arial", Font.BOLD, 18));
         headerPanel.add(headerLabel);
 
@@ -41,14 +39,12 @@ public class HomeAdmin extends JFrame {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(3, 1, 10, 10));
 
-        JButton manageUsersButton = new JButton("Manage User Accounts");
-        JButton manageScheduleButton = new JButton("Manage Schedule");
-        JButton manageAdminProfileButton = new JButton("Manage Admin Profile");
+        JButton profileButton = new JButton("User profile");
+        JButton scheduleButton = new JButton("Doctor Schedule");
 
         // Adding buttons to the center panel
-        centerPanel.add(manageUsersButton);
-        centerPanel.add(manageScheduleButton);
-        centerPanel.add(manageAdminProfileButton);
+        centerPanel.add(profileButton);
+        centerPanel.add(scheduleButton);
 
 
         // Add panels to the main panel
@@ -62,17 +58,13 @@ public class HomeAdmin extends JFrame {
         add(outerPanel);
 
         // Button actions (examples)
-        manageUsersButton.addActionListener((ActionEvent e) -> {
+        profileButton.addActionListener((ActionEvent e) -> {
             JOptionPane.showMessageDialog(this, "Manage User Accounts clicked!");
             this.dispose();
         });
 
-        manageScheduleButton.addActionListener((ActionEvent e) -> {
+        scheduleButton.addActionListener((ActionEvent e) -> {
             JOptionPane.showMessageDialog(this, "Manage Schedule clicked!");
-        });
-
-        manageAdminProfileButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage Admin Profile clicked!");
         });
     }
 
