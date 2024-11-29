@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import user.UserManagement;
 import home.HomeAdmin;
 import home.HomeDoctorView;
+import home.HomePatientView;
+
 public class LogInController {
     private LogInModel model;
     private LogInView view;
@@ -37,6 +39,8 @@ public class LogInController {
                     	
                     }
                     else if (permission ==3) {
+                    	HomePatientView view = new HomePatientView();
+                    	view.setVisible(true);
                     	
                     }
                     
