@@ -9,6 +9,7 @@ import appointment.AppointmentBookingGUI;
 //import appointment.AppointmentBookingGUI;
 import login.LogInController;
 import login.LogInView;
+import schedule.ManageSchedule;
 import user.UserManagement;
 import appointment.AppointmentBookingGUI;
 
@@ -26,8 +27,10 @@ public class run {
             	
                 // Initialize the GUI (Appointment Booking)
             	UserManagement users = UserManagement.getInstance();
+            	ManageSchedule schedule = ManageSchedule.getInstance();
             	try {
 					users.getAll();
+					schedule.getAll();
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

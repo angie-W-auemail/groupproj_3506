@@ -3,10 +3,14 @@ package schedule;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
+
+import user.UserManagement;
+
 import java.text.MessageFormat;
 
 public class ManageSchedule {
 	private ArrayList<Schedule> appointment_list= new ArrayList<Schedule>();
+	private static final ManageSchedule instance = new ManageSchedule();
 	public ManageSchedule(){};
 	
 	//load all saved appointments
@@ -34,6 +38,9 @@ public class ManageSchedule {
 		br.close();
 		
 	}
+	public static ManageSchedule getInstance() {
+        return instance;
+    }
 
 	public ArrayList<Schedule> getRecords(String patient_id){
 		ArrayList<Schedule> list = new ArrayList<Schedule>();
