@@ -14,13 +14,12 @@ import user.User;
 public class LogInController {
     private LogInModel model;
     private LogInView view;
-    private UserManagement users;
+    private final UserManagement users = UserManagement.getInstance();
     private boolean loginSuccess;
     private int permission;
     User person;
-    public LogInController(LogInView view, UserManagement user_list){
+    public LogInController(LogInView view){
         this.view = view;
-        users = user_list;
  
         view.addLoginListener(new LoginListener());
     }

@@ -9,9 +9,14 @@ public class UserManagement {
 	private ArrayList<Patient> patient_list= new ArrayList<Patient>();
 	private ArrayList<String> id_list = new ArrayList<String>();
 	private ArrayList<String> pass_list = new ArrayList<String>();
+	private static final UserManagement instance = new UserManagement();
 
 	public UserManagement(){};
 	//read from db all arraylists
+	 public static UserManagement getInstance() {
+	        return instance;
+	    }
+	
 	public void getAll() throws IOException{
 		String line = "";
 		String currentPath = new java.io.File(".").getCanonicalPath();

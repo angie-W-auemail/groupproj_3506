@@ -25,15 +25,16 @@ public class run {
             public void run() {
             	
                 // Initialize the GUI (Appointment Booking)
-            	UserManagement users = new UserManagement();
+            	UserManagement users = UserManagement.getInstance();
             	try {
 					users.getAll();
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             	LogInView view       = new LogInView();
-                LogInController controller = new LogInController(view, users);        
+                LogInController controller = new LogInController(view);        
                 view.setVisible(true);
                 
                 //AppointmentBookingGUI gui = new AppointmentBookingGUI();
