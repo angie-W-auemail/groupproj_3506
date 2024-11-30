@@ -10,13 +10,14 @@ import appointment.AppointmentBookingGUI;
 import login.LogInController;
 import login.LogInView;
 import schedule.ManageSchedule;
+import user.User;
 import user.UserManagement;
 import appointment.AppointmentBookingGUI;
 
 
 /*************************
  * Run class stores the main process of MVC
- * 
+ * load all users and booked appointments objects from UserManagement and ManageSchedule
  */
 public class run {
     public static void main(String[] args)throws IOException {
@@ -28,6 +29,7 @@ public class run {
                 // Initialize the GUI (Appointment Booking)
             	UserManagement users = UserManagement.getInstance();
             	ManageSchedule schedule = ManageSchedule.getInstance();
+            	User mainPerson = User.getInstance(); 
             	try {
 					users.getAll();
 					schedule.getAll();

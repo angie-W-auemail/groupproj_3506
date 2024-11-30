@@ -2,6 +2,9 @@ package home;
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import profile.ProfileView;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import user.User;
@@ -73,7 +76,8 @@ public class HomeAdmin extends JFrame {
         });
 
         manageAdminProfileButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage Admin Profile clicked!");
+        	 ProfileView view = new  ProfileView();
+        	 this.dispose();
         });
     }
 

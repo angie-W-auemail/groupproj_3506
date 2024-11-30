@@ -15,7 +15,13 @@ public class User {
 	private int permission;
 	private String email;
 	private String phone;
+	private static final User instance = new User();
+	
 	User(){};
+	public static User getInstance() {
+        return instance;
+  }
+	
 	User(String email, String phone,String name, String user_id, String password, int permission){
 		this.name=name;
 		this.user_id = user_id;

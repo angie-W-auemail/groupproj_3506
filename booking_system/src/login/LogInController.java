@@ -15,6 +15,8 @@ public class LogInController {
     private int permission;
     private User person;
     private final UserManagement users = UserManagement.getInstance();
+    private final User mainPerson =User.getInstance(); 
+    
     public LogInController(LogInView view){
         this.view = view;
  
@@ -67,8 +69,10 @@ public class LogInController {
     		permission = this.person.permission();
     	}
     	else if (users.getPatient(user.getUserName()).permission()!=0) {
-    		this.permission =users.getPatient(user.getUserName()).permission();
+    		person=users.getPatient(user.getUserName());
+    		this.permission =this.person.permission();
     	}
+    	mainPerson.setUser(person.email(), person.phone(), person.name(), person.id(), person.pass(), permission);;
     	return this.users.matchID(user.getUserName(),  user.getPassword());
 
       }

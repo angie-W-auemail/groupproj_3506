@@ -257,25 +257,26 @@ public class UserManagement {
 		return new Patient();
 	}
 	public void updateAdmin(Admin person) throws IOException{
-		if (admin_list.indexOf(person)!=-1) {
-			admin_list.set(patient_list.indexOf(person),person);
-			String path = new java.io.File(".").getCanonicalPath()+"\\src\\admin.csv";
-			updateDB(path,1);
-		}
+		Admin current =  getAdmin(person.id());
+		admin_list.remove(current);
+		admin_list.add(person);
+		String path = new java.io.File(".").getCanonicalPath()+"\\src\\admin.csv";
+		updateDB(path,1);
 	}
 	public void updateDoctor(Doctor person) throws IOException{
-		if (doctor_list.indexOf(person)!=-1) {
-			doctor_list.remove(doctor_list.indexOf(person));
-			String path = new java.io.File(".").getCanonicalPath()+"\\src\\doctors.csv";
-			updateDB(path,2);
-		}
+		Doctor current = getDoctor(person.id());
+		doctor_list.remove(current);
+		doctor_list.add(person);
+		//doctor_list.remove(doctor_list.indexOf(person));
+		String path = new java.io.File(".").getCanonicalPath()+"\\src\\doctors.csv";
+		updateDB(path,2);
 	}
-	public void updatePatient(Doctor person) throws IOException{
-		if (patient_list.indexOf(person)!=-1) {
-			patient_list.remove(patient_list.indexOf(person));
-			String path = new java.io.File(".").getCanonicalPath()+"\\src\\patients.csv";
-			updateDB(path,3);
-		}
+	public void updatePatient(Patient person) throws IOException{
+		Patient current = getPatient(person.id());
+		patient_list.remove(current);
+		patient_list.add(person);
+		String path = new java.io.File(".").getCanonicalPath()+"\\src\\patients.csv";
+		updateDB(path,3);
 	}
 	
 	

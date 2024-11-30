@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import profile.ProfileView;
+
 public class HomePatientView extends JFrame {
 
     public HomePatientView() {
@@ -74,7 +76,8 @@ public class HomePatientView extends JFrame {
         });        
 
         profileButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Patient Profile Clicked!");
+        	ProfileView view = new  ProfileView();
+       	 	this.dispose();
         });
     }
 

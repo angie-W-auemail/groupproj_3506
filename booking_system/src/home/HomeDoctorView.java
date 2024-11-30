@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import user.User;
 import manageAccounts.manageView;
+import profile.ProfileView;
 
 public class HomeDoctorView extends JFrame {
 
@@ -84,7 +85,8 @@ public class HomeDoctorView extends JFrame {
         });
 
         profileButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Doctor Profile clicked!");
+        	ProfileView view = new  ProfileView();
+       	 	this.dispose();;
         });
     }
 
