@@ -3,6 +3,7 @@ package home;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import appointment.AppointmentView;
 import profile.ProfileView;
 
 import java.awt.*;
@@ -72,7 +73,8 @@ public class HomeAdmin extends JFrame {
         });
 
         manageScheduleButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "Manage Schedule clicked!");
+        	 AppointmentView view = new AppointmentView();
+        	 this.dispose();
         });
 
         manageAdminProfileButton.addActionListener((ActionEvent e) -> {
