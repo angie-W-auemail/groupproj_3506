@@ -56,7 +56,7 @@ public class ManageSchedule {
 		ArrayList<Schedule> list = new ArrayList<Schedule>();
 		for (int i=0; i<appointment_list.size();i++) {
 			Schedule current = appointment_list.get(i);
-			if(current.patient().equals(doctor_id)) {
+			if(current.doctor().equals(doctor_id)) {
 				list.add(current);
 			}
 		}

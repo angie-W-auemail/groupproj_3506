@@ -8,6 +8,8 @@ import profile.ProfileView;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+
 import user.User;
 import user_accounts.AdminUserView;
 public class HomeAdmin extends JFrame {
@@ -73,7 +75,12 @@ public class HomeAdmin extends JFrame {
         });
 
         manageScheduleButton.addActionListener((ActionEvent e) -> {
-        	 AppointmentView view = new AppointmentView();
+        	 try {
+				AppointmentView view = new AppointmentView();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         	 this.dispose();
         });
 

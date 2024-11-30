@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
+import appointment.AppointmentView;
 import user.User;
 import manageAccounts.manageView;
 import profile.ProfileView;
@@ -75,7 +78,13 @@ public class HomeDoctorView extends JFrame {
 
         // Button actions (examples)
         scheduleButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "View Schedule Clicked!");
+        	try {
+				AppointmentView view = new AppointmentView();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+       	 	this.dispose();
         });
 
         patientButton.addActionListener((ActionEvent e) -> {

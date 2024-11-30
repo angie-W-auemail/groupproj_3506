@@ -37,6 +37,14 @@ public class UserManagement {
 	 public int patientSize () {
 		 return patient_list.size();
 	 }
+	 public String doctorID(String name) {
+		 for (int i=0;i<doctor_list.size();i++) {
+			 if(name==doctor_list.get(i).name()) {
+				 return doctor_list.get(i).id();
+			 }
+		 }
+		 return "";
+	 }
 	 
 	public void getAll() throws IOException{
 		String line = "";
