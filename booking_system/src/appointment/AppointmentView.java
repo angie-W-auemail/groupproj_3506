@@ -137,7 +137,7 @@ public class AppointmentView {
     	Date selectedDate = (Date) dateSpinner.getValue();
         LocalDate startDate = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(selectedDate), DateTimeFormatter.ISO_DATE)
                 .with(java.time.DayOfWeek.MONDAY);
-        System.out.println(name);
+        //System.out.println(name);
         String id=users.doctorID(name);
     	ArrayList <Schedule> blocks = schedule.getRecorDoc(id);
     	int year,mon,day;
@@ -150,6 +150,7 @@ public class AppointmentView {
     		year = current.getYear();
     		mon = current.getMonth();
     		day = current.getDate();
+    		//System.out.println(current.getHours());
     		for(int j=0; j<5;j++) {
     			startD = startDate.plusDays(j).getDayOfMonth();
     			startM = startDate.plusDays(j).getMonthValue();
@@ -201,16 +202,14 @@ public class AppointmentView {
         int selectedRow = scheduleTable.getSelectedRow();
         int selectedColumn = scheduleTable.getSelectedColumn();
         Date selectedDate = (Date) dateSpinner.getValue();
-        LocalDate date = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(selectedDate), DateTimeFormatter.ISO_DATE);
+        LocalDate date = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(selectedDate), DateTimeFormatter.ISO_DATE)
+        		.with(java.time.DayOfWeek.MONDAY).plusDays(selectedColumn-1);
         String id = showPatientIDPopup();
         String doctorId=users.doctorID(doctorDropdown.getSelectedItem().toString());
         
-        System.out.println(date.getYear()+ date.getMonthValue()+ 
-       		 date.getDayOfMonth()+(selectedRow+8));
+        //System.out.println(selectedRow+" "+selectedColumn);
         Schedule selected = new Schedule(date.getYear(), date.getMonthValue(), 
-        		 date.getDayOfMonth(), selectedRow+8, id,  doctorId);
-        
-        
+        		 date.getDayOfMonth(), selectedRow+1, id,  doctorId);        
 
         if (selectedRow >= 0 && selectedColumn > 0) {
             tableModel.setValueAt("Booked", selectedRow, selectedColumn);
