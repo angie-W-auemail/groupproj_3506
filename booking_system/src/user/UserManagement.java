@@ -78,6 +78,7 @@ public class UserManagement {
         				myArray[0], myArray[1], myArray[5],Integer.parseInt(myArray[2]));
 	    		doctor_list.add(person1);
 	    		// Split the string by comma and collect into ArrayList
+	    		//System.out.println(myArray[7]);
 	    		ArrayList<String> patientsList = new ArrayList<>(Arrays.asList(myArray[7].split("\\|")));
 	    		person1.setPatients(patientsList);
 	    		id_list.add(person1.id());

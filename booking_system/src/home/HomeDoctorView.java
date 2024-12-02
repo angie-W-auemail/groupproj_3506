@@ -17,6 +17,7 @@ import javax.swing.border.TitledBorder;
 
 import appointment.AppointmentView;
 import user.User;
+import user_accounts.PatientsView;
 import manageAccounts.manageView;
 import profile.ProfileView;
 
@@ -88,9 +89,9 @@ public class HomeDoctorView extends JFrame {
         });
 
         patientButton.addActionListener((ActionEvent e) -> {
-            JOptionPane.showMessageDialog(this, "View Patient Profiles clicked!");
-            manageView view = new manageView();
-            view.setVisible(true);
+            //JOptionPane.showMessageDialog(this, "View Patient Profiles clicked!");
+        	PatientsView view = new PatientsView();
+            //view.setVisible(true);
         });
 
         profileButton.addActionListener((ActionEvent e) -> {
