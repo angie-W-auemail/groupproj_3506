@@ -46,10 +46,10 @@ public class PatientsView {
         Patient patient;
         for (int i=0; i<patients.size(); i++){
         	
-        	id =patients.get(i).replace("}", ""); //patient id
-        	System.out.println(patients.get(i));
+        	id =patients.get(i).replaceAll("}", ""); //patient id
+        	System.out.println(id);
         	patient = users.getPatient(id);
-        	data[i][i]=patients.get(i);
+        	data[i][0]=id;
         	data[i][1]=patient.name();
         	data[i][2]=patient.email();
         	
@@ -91,6 +91,7 @@ public class PatientsView {
         frame.add(recordButton, BorderLayout.SOUTH);
 
         // Make the frame visible
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
 }
