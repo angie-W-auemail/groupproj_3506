@@ -72,7 +72,7 @@ public class LogInController {
     		person=users.getPatient(user.getUserName());
     		this.permission =this.person.permission();
     	}
-    	mainPerson.setUser(person.email(), person.phone(), person.name(), person.id(), person.pass(), permission);;
+    	mainPerson.setUser(person.email(), person.phone(), person.name(), person.id(), person.pass(), permission);
     	return this.users.matchID(user.getUserName(),  user.getPassword());
 
       }

@@ -11,10 +11,9 @@ import user.Doctor;
 import user.Patient;
 import user.Admin;
 
-public class ProfileView {
+public class  CreateProfile {
 	
-	private final User selected =User.getInstance();
-	private User mainPerson = selected;
+	private User mainPerson=new User();
 	private final UserManagement users = UserManagement.getInstance();
 	private Admin admin;
 	private Doctor doctor;
@@ -27,8 +26,9 @@ public class ProfileView {
     private boolean isEditable = false; // Tracks if fields are editable
 	
     
-    public ProfileView() {
+    public CreateProfile(int perm) {
         // Frame setup
+    	this.permission = perm;
         frame = new JFrame("User Profile");
         frame.setSize(1000, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,7 +38,6 @@ public class ProfileView {
         mainPanel.setLayout(new BorderLayout());
         JPanel contentPanel = new JPanel();
         // Add padding
-        permission =mainPerson.permission();
         //JPanel contentPanel = new JPanel(new GridLayout(4, 2, 10, 10)); // 4 rows, 2 columns layout
         if (permission == 1) {
         	contentPanel = new JPanel(new GridLayout(6, 2, 10, 10)); // 4 rows, 2 columns layout
@@ -88,21 +87,16 @@ public class ProfileView {
     		admin=users.getAdmin(mainPerson.id());
     	}
     	else if (permission ==2) {
-    		doctor=users.getDoctor(userId);
-    		String userPricing = Double.toString(doctor.price());
     		pricingLabel = new JLabel("Pricing:");
-    		pricingField = createTextField(userPricing);
+    		pricingField = createTextField("");
     		contentPanel.add(pricingLabel);
     	    contentPanel.add(pricingField);
     	}
     	else if (permission ==3) {
-    		patient = users.getPatient(userId);
-    		String userAddress = patient.address();
-    		String userMedicalHistory = patient.medicalHistory();
             addressLabel = new JLabel("Address:");
             medicalHistoryLabel = new JLabel("Medical History:");
-            addressField = createTextField(userAddress);
-            medicalHistoryField = createTextField(userMedicalHistory);
+            addressField = createTextField("");
+            medicalHistoryField = createTextField("");
             contentPanel.add(addressLabel);
             contentPanel.add(addressField);        
             contentPanel.add(medicalHistoryLabel);
@@ -122,6 +116,7 @@ public class ProfileView {
 
         // Add main panel to frame
         frame.add(mainPanel);
+        toggleEditable(true);
 
         // Action listeners
         updateButton.addActionListener(e -> toggleEditable(true));
@@ -152,14 +147,16 @@ public class ProfileView {
         if (permission==3) {
         	addressField.setEditable(editable);
         	medicalHistoryField.setEditable(editable);
+        	idField.setEditable(editable);
         }
         if(permission ==2) {
         	pricingField.setEditable(editable);
+        	idField.setEditable(editable);
         }
         //admin capable of editing permission and id
         if (permission ==1) {
         	idField.setEditable(editable);
-        	permissionField.setEditable(editable);
+        	// create account already has permission set up permissionField.setEditable(editable);
         }
         
         // Enable/Disable buttons

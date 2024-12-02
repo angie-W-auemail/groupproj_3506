@@ -17,7 +17,7 @@ public class User {
 	private String phone;
 	private static final User instance = new User();
 	
-	User(){};
+	public User(){};
 	public static User getInstance() {
         return instance;
   }

@@ -7,6 +7,9 @@ import user.Patient;
 import user.UserManagement;
 import user.User;
 import java.awt.*;
+import profile.CreateProfile;
+import profile.ProfileView;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -18,6 +21,9 @@ public class AdminUserView {
     private JTextField searchField;
     private JButton searchButton, updateButton, deleteButton, createButton;
     private final UserManagement users = UserManagement.getInstance();
+    String selectedRole;
+    private final User mainPerson =User.getInstance();
+    private final User selected =User.getInstance();
 
     public AdminUserView() {
         // Frame setup
@@ -88,8 +94,19 @@ public class AdminUserView {
             int selectedRow = userTable.getSelectedRow();
             if (selectedRow >= 0) {
                 String userId = (String) tableModel.getValueAt(selectedRow, 0);
-                String permission = (String) tableModel.getValueAt(selectedRow, 1);
-                JOptionPane.showMessageDialog(frame, "Update profile for User ID: " + userId + " with permission: " + permission);
+                int permission = (int) tableModel.getValueAt(selectedRow, 2);
+                User person = new User();
+                if (permission ==1) {
+                	person = (User)(users.getAdmin(userId));
+                }
+                if (permission ==2) {
+                	person = (User)(users.getDoctor(userId));
+                }
+                if (permission ==3) {
+                	person = (User)(users.getPatient(userId));
+                }
+                selected.setUser(person.email(), person.phone(), person.name(), person.id(), person.pass(), permission);
+                ProfileView view = new ProfileView();
             } else {
                 JOptionPane.showMessageDialog(frame, "Please select a user to update.");
             }
@@ -129,9 +146,41 @@ public class AdminUserView {
         });
 
         // Create button action
-        createButton.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Create Account button clicked!"));
+        createButton.addActionListener(e -> {
+        	permissionView();
+        	// manage account won't dispose account management page frame.dispose();
+        	int newPermission = 1;
+        	if (selectedRole=="Admin") {
+        		newPermission=1;
+        	}
+        	else if (selectedRole=="Doctor") {
+        		newPermission=2;
+        	}
+        	else if (selectedRole=="Patient") {
+        		newPermission=3;
+        	}
+        	
+        	CreateProfile view = new CreateProfile(newPermission);
+        });
     }
 
+    
+    private void permissionView() {
+    	
+        // Define options for the combo box
+        String[] roles = {"Admin", "Doctor", "Patient"};
+        
+        // Show input dialog with a combo box
+        selectedRole = (String) JOptionPane.showInputDialog(
+            null, 
+            "Select role:", 
+            "Permission Selection", 
+            JOptionPane.QUESTION_MESSAGE, 
+            null, 
+            roles, // Array of options
+            roles[0] // Default option
+        );
+    }
     private void filterTableById(String searchId) {
         for (int i = 0; i < tableModel.getRowCount(); i++) {
             String userId = (String) tableModel.getValueAt(i, 0);
